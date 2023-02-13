@@ -1,68 +1,68 @@
 *{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-body{
-    max-width: 800px;
-    height: 100vh;
-    margin: auto;
-    text-align: center;
-}
-/* -----------main container div--------------- */
-.container{
-    padding: 20px;
-    border: 1px solid black;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-/* ----------- score board container----------------*/
-.scoreBoard{
-    /* height: 50px; */
-    /* background-color: gray; */
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    padding: 5px;
-    font-size: 1.5em;
-    border: 1px solid grey;
-    border-radius: 4px ;
+/* utility styling */
+
+.btn{
+  height: 50px;
+  padding: 0 10px;
+  font-size: 1.2em;
+  border-radius: 40px;
+  width: 100px;
+  margin: 20px;
+  transition: all .3s;
 }
-.user{
-    background-color: yellow;
-    border: 1px solid black;
+.btn:hover{
+  background-color: violet;
+  transform: scale(1.1);
+  box-shadow: 0 0 2px ;
 }
-.computer{
-    background-color: white;
-    border: 1px solid black;
+
+.block{
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+  height: 40px;
+  font-size: 1.2em;
 }
-/* ------------------choices styling------------------ */
-.choices{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 20px;
+
+/* main styling */
+body{
+  height: 100vh;
+  position: relative;
 }
-button{
-    width: 100px;
-    height: 50px;
-    border-radius: 4px;
-    font-size: 1.3em;
-    cursor: pointer;
+h1,h2{
+  text-align: center;
+  padding: 10px;
 }
-button:hover{
-    box-shadow: 1px 1px 5px black;
+.container{
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%,-50%);
+width: 500px;
+height: 500px;
+padding: 20px;
+border-radius: 30px;
+border: 1px solid blueviolet;
+background:linear-gradient(to top,rgba(216, 25, 216, 0.2),rgba(100, 40, 124, 0.395));
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
 }
-/* ------------------result container---------------------- */
-.result{
-    padding: 20px;
+
+.anim{
+  animation:pop 1s infinite;
 }
-.result h3,.result h2{
-    margin: 10px 0;
-}
-/* -----------------reload container------------------------ */
-.reload{
-    padding: 20px;
-}
-.reload button{
-    background-color: red;
+@keyframes pop{
+  100%{
+    background-color: violet;
+    box-shadow: 0 0 5px ;
+    scale: 1.05;
+  }
 }

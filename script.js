@@ -1,111 +1,111 @@
-const userScore = document.querySelector('.userScore');
-const computerScore=document.querySelector('.computerScore');
-
-const choices=document.querySelectorAll('.btn');
-
-const currentResult=document.querySelector('.currentResult');
-const reload=document.querySelector('.reload');
-const finalResult=document.querySelector('.finalResult');
-
-let cScore =0;
-let uScore =0;
-
-let userChoice;
-let computerGenerate;
-let computerChoice;
-
-
-
-let  getResult=(userChoice,computerGenerate)=>
-{
-    if (computerGenerate==0)
-    computerChoice='rock';
-else if(computerGenerate==1)
-    computerChoice='paper';
-else
-    computerChoice='scissor';
-
-
-    console.log(userChoice);
-    console.log(computerChoice);
-
-    if(computerChoice==userChoice)
-    {
-    currentResult.innerHTML="It's a Draw";
-    return;
-    }
-
-    if(userChoice=='rock')
-    {
-        if(computerChoice=='paper')
-        {
-            cScore+=1;
-            computerScore.innerHTML=cScore;
-            currentResult.innerHTML='computer wins by paper';
-        }
-        else
-        {
-            uScore+=1;
-            userScore.innerHTML=uScore;
-            currentResult.innerHTML='user wins rock';
-        }
-        // count+=1;
-    }
-    if(userChoice=='paper')
-    {
-        if(computerChoice=='scissor')
-        {
-            cScore+=1;
-            computerScore.innerHTML=cScore;
-            currentResult.innerHTML='computer wins scissor';
-        }
-        else
-        {
-            uScore+=1;
-            userScore.innerHTML=uScore;
-            currentResult.innerHTML='user wins paper';
-        }
-        // count+=1;
-    }
-    if(userChoice=='scissor')
-    {
-        if(computerChoice=='rock')
-        {
-            cScore+=1;
-            computerScore.innerHTML=cScore;
-            currentResult.innerHTML='computer wins rock';
-        }
-        else
-        {
-            uScore+=1;
-            userScore.innerHTML=uScore;
-            currentResult.innerHTML='user wins scissor';
-        }
-        // count+=1;
-    }
-}
-
-
-
-
-
-
-choices.forEach(element => {
-    element.addEventListener('click',(e)=>{
-     userChoice=e.target.id;
-    computerGenerate=Math.floor(Math.random()*3);
-    getResult(userChoice,computerGenerate);
-
-    })
-    
-
-
-});
-
-reload.addEventListener('click',()=>{
+//reloading
+const reset = document.querySelector('#reset');
+reset.addEventListener('click',()=>{
     window.location.reload();
 })
+//score counting variables in global scope 
+let count=0;
+let user=0;
+let computer=0;
+//choice clicking event
+document.querySelectorAll('button').forEach(ele=>{
+    ele.addEventListener('click',e=>{
+        document.querySelector('.result').innerHTML="Game has started";
+        count++;
+        //taking user choice
+        let idd=  e.target.id ; 
+        //taking computer choice by generating random number    
+        let com = Math.floor(Math.random()*3); 
+        //count will increase till 5 i.e, there only 5 rounds of game from where computer will decide who is the winner    
+        if(count<=5)
+        {
+            console.log(count);
+            //assigning computer choice from " assign_choice" function (go to line no 99) for each random generated number;
+            com=assign_choice(com);
+            //checking user and computer choice from "check" function (go to line no 49) and show the immediate result
+            check(idd,com);
+            console.log(idd);
+            console.log(com);
+            console.log(computer);
+            console.log(user);
+        }
+        else{
+            document.querySelector('#reset').classList.add('anim');
+            //announce the winner using "generate_winner" function (line no 41)
+            generate_winner(user,computer);
+        }
+    })
+})
 
-// TODO:
-// // i have to make for 5 round gameplay;
+//announcing winner
+function generate_winner(u,c)
+{
+    if(user<computer)
+    document.querySelector('.result').innerHTML="Computer is the winner<br>To replay click Reset";
+    else if(user==computer)
+    document.querySelector('.result').innerHTML="Game is tie<br>To replay click Reset";
+    else
+    document.querySelector('.result').innerHTML="User is the winner<br>To replay click Reset";
+}
+//user and computer choice checking function
+function check(i,c)
+{
+    if(i==c)
+    {
+        document.querySelector('.current-result').innerHTML="it is draw";
+        //return statement is important else interpreter will execute next condition  where i matches and also increase unwanted score
+        return;
+    }
+
+    else if(i=='rock')
+    {
+        if(c=='paper')
+        {
+        document.querySelector('.current-result').innerHTML="computer wins";
+        computer++;
+        
+        }
+        else
+        {
+            document.querySelector('.current-result').innerHTML="user wins";
+            user++;
+        }
+    }
+    else if(i=='paper')
+    {
+        if(c=='scissor')
+        {
+            document.querySelector('.current-result').innerHTML="computer wins";
+            computer++;
+            }
+        else
+        {
+            document.querySelector('.current-result').innerHTML="user wins";
+            user++;
+        }
+    }
+    else
+    {
+        if(c=='rock')
+        {
+            document.querySelector('.current-result').innerHTML="computer wins";
+            computer++;
+            }
+        else
+        {
+            document.querySelector('.current-result').innerHTML="user wins";
+            user++;
+        }
+    }
+}
+//computer choice generating number
+function assign_choice(c)
+{
+    if(c==0)
+    return c='rock';
+    else if (c==1)
+    return c='paper';
+    else
+    return c='scissor';
+}
 
